@@ -33,6 +33,7 @@ func main() {
 	if(err != nil) {
 		fmt.Println("Error: ", err)
 		fmt.Println("=============")
+		// panic("Can't continue")
 	}
 
 	fmt.Println("Welcome to Mini Bank!!")
