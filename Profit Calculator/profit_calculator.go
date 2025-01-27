@@ -19,10 +19,11 @@ func main() {
 	earningBeforeTax, profit, ratio := calculator(revenue, expenses)
 
 	fmt.Println("EBT is ", earningBeforeTax, ", Profit is ", profit, " and Ratio was ", ratio)
-	fmt.Printf("EBT is %0.2f, Profit is %0.4f, and Ratio was %0.4f", earningBeforeTax, profit,  ratio)
+	results := fmt.Sprintf("EBT is %0.2f, Profit is %0.4f, and Ratio was %0.4f", earningBeforeTax, profit, ratio)
+	fmt.Printf(results)
 
 
-	os.WriteFile("Metrics.txt", []byte("EBT is: " + fmt.Sprint(earningBeforeTax) + ".\nProfit is: " + fmt.Sprint(profit) + ". \nRatio is: " + fmt.Sprint(ratio)), 0644)
+	os.WriteFile("Metrics.txt", []byte(results), 0644)
 }
 
 func calculator(revenue, expenses float64) (ebt float64, profit float64, ratio float64) {
@@ -36,5 +37,8 @@ func getUserInput(infoTest string) float64 {
 	var inputValue float64
 	fmt.Print(infoTest)
 	fmt.Scan(&inputValue)
+	if inputValue <= 0 {
+		panic("Value should be greater than 0")
+	}
 	return inputValue
 }

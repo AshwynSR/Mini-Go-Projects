@@ -1,3 +1,1 @@
-EBT is: 500.
-Profit is:410.00000000000006. 
-Ratio is:1.219512195121951
+EBT is 1500.00, Profit is 1350.0000, and Ratio was 1.1111
