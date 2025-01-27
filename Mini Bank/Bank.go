@@ -2,14 +2,28 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 )
+
+const balanceFileName = "balance.txt"
+
+func writeBalance(balance float64) {
+	currentBalance := fmt.Sprint(balance)
+	os.WriteFile(balanceFileName, []byte(currentBalance), 0744)
+}
+
+func getBalanceFromFile() float64{
+	data, _ := os.ReadFile(balanceFileName)
+	balance, _ := strconv.ParseFloat(string(data), 64)
+	return balance
+}
 
 func main() {
 
-	accountBalance := 1000.0
-
+	accountBalance := getBalanceFromFile()
+	fmt.Println("Welcome to Mini Bank!!")
 	for {
-		fmt.Println("Welcome to Mini Bank!!")
 		fmt.Println("What do you want to do?")
 		fmt.Println("1. Check Balance")
 		fmt.Println("2. Deposit")
@@ -34,6 +48,7 @@ func main() {
 			accountBalance += depositAmount
 			fmt.Println("Money Deposited: ", depositAmount)
 			fmt.Println("Current balance: ", accountBalance)
+			writeBalance(accountBalance)
 		}
 		case 3:
 			var withdrawnAmount float64
@@ -50,10 +65,11 @@ func main() {
 			accountBalance -= withdrawnAmount
 			fmt.Println("Money Withdrawn: ", withdrawnAmount)
 			fmt.Println("Current balance: ", accountBalance)
+			writeBalance(accountBalance)
 		case 4:
 			fmt.Println("GoodBye!! ")
+			fmt.Println("Thanks for choosing our bank!")
 			return
 		}
 	}
-	fmt.Println("Thanks for choosing our bank!")
 }
