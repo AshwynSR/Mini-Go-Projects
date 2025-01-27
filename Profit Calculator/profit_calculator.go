@@ -5,22 +5,12 @@ import (
 	"os"
 )
 
-const taxRate float64 = 18
+var taxRate float64 = 18
 func main() {
 
-	var revenue, expenses float64
-
-	fmt.Print("Enter Revenue Generated: ")
-	fmt.Scan(&revenue)
-
-	if revenue <= 0 {
-		panic("Revenue can't be less then or equal to 0")
-	}
-	fmt.Print("Enter Expenses: ")
-	fmt.Scan(&expenses)
-	if expenses <= 0 {
-		panic("Expenses can't be less then or equal to 0")
-	}
+	revenue := getUserInput("Revenue is: ")
+	expenses := getUserInput("Expenses were: ")
+	taxRate = getUserInput("Tax rate: ")
 
 	// earningBeforeTax := revenue - expenses
 	// profit := earningBeforeTax * (1 - taxRate/100)
@@ -42,4 +32,9 @@ func calculator(revenue, expenses float64) (ebt float64, profit float64, ratio f
 	return ebt, profit, ratio
 }
 
-
+func getUserInput(infoTest string) float64 {
+	var inputValue float64
+	fmt.Print(infoTest)
+	fmt.Scan(&inputValue)
+	return inputValue
+}
