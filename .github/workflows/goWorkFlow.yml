@@ -1,0 +1,17 @@
+name: Workflow file to test Go script running
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Go
+        uses: actions/setup-go@v4
+
+      - name: Run ZIP Validation Script
+        run: |
+          cd Scripts
+          go run main.go
